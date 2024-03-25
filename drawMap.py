@@ -34,6 +34,10 @@ id_to_index = {obj["id"]: index for index, obj in enumerate(vertices_data)}
 # Iterate over each way element
 ways_data = []
 for way in root.findall('way'):
+    # check if this way is a hightway
+    if not any(tag.attrib.get('k') == 'highway' for tag in way.findall('tag')):
+        continue
+
     last_node = None
     next_node = None
     for nd in way.findall('nd'):
