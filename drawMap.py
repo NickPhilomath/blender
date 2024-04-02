@@ -3,7 +3,7 @@ import xml.etree.ElementTree as ET
 
 
 # load data from file
-xml_file_path = "data/map-small.osm"
+xml_file_path = "output.osm"
 tree = ET.parse(xml_file_path)
 root = tree.getroot()
 
@@ -34,10 +34,6 @@ id_to_index = {obj["id"]: index for index, obj in enumerate(vertices_data)}
 # Iterate over each way element
 ways_data = []
 for way in root.findall('way'):
-    # check if this way is a hightway
-    if not any(tag.attrib.get('k') == 'highway' for tag in way.findall('tag')):
-        continue
-
     last_node = None
     next_node = None
     for nd in way.findall('nd'):
